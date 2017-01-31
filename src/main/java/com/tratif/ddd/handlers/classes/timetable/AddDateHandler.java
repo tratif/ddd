@@ -7,23 +7,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tratif.ddd.domain.classes.timetable.ScheduledDate;
 import com.tratif.ddd.domain.classes.timetable.Timetable;
 import com.tratif.ddd.domain.classes.timetable.TimetableRepository;
-import com.tratif.ddd.handlers.classes.timetable.command.AssignTrainer;
+import com.tratif.ddd.handlers.classes.timetable.command.AddDate;
 
 @Component
 @Transactional
-public class AssignTrainerHandler {
+public class AddDateHandler {
 
 	private TimetableRepository repository;
 	
 	@Autowired
-	public AssignTrainerHandler(TimetableRepository repository) {
+	public AddDateHandler(TimetableRepository repository) {
 		this.repository = repository;
 	}
 	
-	public void handle(AssignTrainer command) {
+	public void handle(AddDate command) {
 		Timetable timetable = repository.findById(command.timetableId());
 		ScheduledDate date = new ScheduledDate(command.dayOfWeek(), command.classTime());
-		timetable.assignTrainer(date, command.trainerId());
+		timetable.addDate(date);
 		repository.save(timetable);
 	}
 }

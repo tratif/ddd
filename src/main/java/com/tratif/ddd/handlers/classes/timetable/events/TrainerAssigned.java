@@ -1,44 +1,47 @@
 package com.tratif.ddd.handlers.classes.timetable.events;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.UUID;
 
 import com.tratif.ddd.DomainEvent;
+import com.tratif.ddd.domain.classes.timetable.ScheduledDate;
 
 @SuppressWarnings("serial")
 public class TrainerAssigned extends DomainEvent {
 
-	private UUID id;
-	private DayOfWeek dayOfWeek;
-	private LocalTime time;
+	private UUID timetableId;
+	private ScheduledDate date;
+	private UUID trainerId;
 	
-	public TrainerAssigned(UUID id, DayOfWeek dayOfWeek, LocalTime time) {
+	public TrainerAssigned(UUID timetableId, ScheduledDate date, UUID trainerId) {
 		super();
-		this.id = id;
-		this.dayOfWeek = dayOfWeek;
-		this.time = time;
+		this.timetableId = timetableId;
+		this.date = date;
+		this.trainerId = trainerId;
 	}
 
 	public UUID getId() {
-		return id;
+		return timetableId;
 	}
 
-	public DayOfWeek getDayOfWeek() {
-		return dayOfWeek;
+	public ScheduledDate getDate() {
+		return date;
 	}
 
-	public LocalTime getTime() {
-		return time;
+	public UUID getTrainerId() {
+		return trainerId;
+	}
+
+	public UUID getTimetableId() {
+		return timetableId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((dayOfWeek == null) ? 0 : dayOfWeek.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((timetableId == null) ? 0 : timetableId.hashCode());
+		result = prime * result + ((trainerId == null) ? 0 : trainerId.hashCode());
 		return result;
 	}
 
@@ -51,24 +54,26 @@ public class TrainerAssigned extends DomainEvent {
 		if (getClass() != obj.getClass())
 			return false;
 		TrainerAssigned other = (TrainerAssigned) obj;
-		if (dayOfWeek != other.dayOfWeek)
-			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!date.equals(other.date))
 			return false;
-		if (time == null) {
-			if (other.time != null)
+		if (timetableId == null) {
+			if (other.timetableId != null)
 				return false;
-		} else if (!time.equals(other.time))
+		} else if (!timetableId.equals(other.timetableId))
+			return false;
+		if (trainerId == null) {
+			if (other.trainerId != null)
+				return false;
+		} else if (!trainerId.equals(other.trainerId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TrainerAssigned [id=" + id + ", dayOfWeek=" + dayOfWeek + ", time=" + time + "]";
+		return "TrainerAssigned [timetableId=" + timetableId + ", date=" + date + ", trainerId=" + trainerId + "]";
 	}
-	
 }

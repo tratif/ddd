@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import javax.persistence.Embeddable;
 
 
+@SuppressWarnings("serial")
 @Embeddable
 public class ScheduledDate implements Serializable {
 
@@ -49,4 +50,15 @@ public class ScheduledDate implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ScheduledDate [dayOfWeek=" + dayOfWeek + ", startTime=" + startTime + "]";
+	}
+
+	public boolean overlaps(ScheduledDate date) {
+		//TODO: implement
+		return false;
+	}
+	
 }
