@@ -25,11 +25,11 @@ public class Timetable {
 	}
 	
 	public void scheduleClass(ClassType classType, ScheduledDate date) {
-		assertDosNotOverlap(date);
+		assertDoesNotOverlap(date);
 		scheduledClasses.add(new ScheduledClass(classType, date));
 	}
 
-	private void assertDosNotOverlap(ScheduledDate date) {
+	private void assertDoesNotOverlap(ScheduledDate date) {
 		// TODO Auto-generated method stub
 		
 	}
