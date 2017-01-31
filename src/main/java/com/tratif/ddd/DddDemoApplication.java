@@ -3,20 +3,13 @@ package com.tratif.ddd;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import reactor.Environment;
 import reactor.bus.EventBus;
 
 @SpringBootApplication
-public class DddDemoApplication extends WebMvcConfigurerAdapter {
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new ClearEventSubscriberListInterceptor());
-	}
-	
+public class DddDemoApplication {
+
 	@Bean
     Environment env() {
         return Environment.initializeIfEmpty()
