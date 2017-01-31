@@ -1,14 +1,18 @@
 package com.tratif.ddd.domain;
 
 import java.util.List;
+import java.util.UUID;
 
-public abstract class BasicRepository<T extends AggregateRoot> implements Repository<T> {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-	private Class<T> clazz;
-	private EventsStorage<T> eventsStorage;
+@Component
+public class BasicRepository<T extends AggregateRoot> implements Repository<T> {
+
+	private EventsStorage eventsStorage;
 	
-	public BasicRepository(Class<T> clazz, EventsStorage<T> eventsStorage) {
-		this.clazz = clazz;
+	@Autowired
+	public BasicRepository(EventsStorage eventsStorage) {
 		this.eventsStorage = eventsStorage;
 	}
 	
@@ -19,14 +23,14 @@ public abstract class BasicRepository<T extends AggregateRoot> implements Reposi
 	}
 
 	@Override
-	public T getById(Long id) {
+	public T getById(UUID id, Class<T> clazz) {
 		T aggregate;
 		try {
-			aggregate = this.clazz.newInstance();
+			aggregate = clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
-		List<Event> events = eventsStorage.getEventsForAggregate(clazz, id);
+		List<Event> events = eventsStorage.loadEvents(id);
 		aggregate.loadFromHistory(events);
 		return aggregate;
 	}

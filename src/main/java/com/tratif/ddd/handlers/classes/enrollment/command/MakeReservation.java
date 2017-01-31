@@ -1,25 +1,27 @@
 package com.tratif.ddd.handlers.classes.enrollment.command;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MakeReservation {
 
-	private final Long memberId;
-	private final Long classId;
+	private final UUID memberId;
+	private final UUID classId;
 	
 	
 	@JsonCreator
-	public MakeReservation(@JsonProperty("memberId") Long memberId, @JsonProperty("classId") Long classId) { // warning: domain model polluted with infracturcutre annotations
+	public MakeReservation(@JsonProperty("memberId") UUID memberId, @JsonProperty("classId") UUID classId) { // warning: domain model polluted with infracturcutre annotations
 		this.memberId = memberId;
 		this.classId = classId;
 	}
 	
-	public Long getClassId() {
+	public UUID getClassId() {
 		return classId;
 	}
 	
-	public Long getMemberId() {
+	public UUID getMemberId() {
 		return memberId;
 	}
 }

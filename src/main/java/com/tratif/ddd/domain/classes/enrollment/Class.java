@@ -1,14 +1,15 @@
 package com.tratif.ddd.domain.classes.enrollment;
 
+import static java.util.stream.Collectors.toList;
+
 import java.time.LocalDateTime;
-import static java.util.stream.Collectors.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
@@ -20,8 +21,8 @@ import com.tratif.ddd.domain.classes.ClassType;
 @Table(name = "classes")
 public class Class {
 
-	@Id @GeneratedValue
-	private Long id;
+	@Id
+	private UUID id;
 	
 	private ClassType classType;
 	private LocalDateTime startTime;
@@ -36,13 +37,14 @@ public class Class {
 	
 	@ElementCollection
 	@OrderColumn
-	private List<Long> waitingMembers;
+	private List<UUID> waitingMembers;
 	
 	@Deprecated // for hibernate only
 	Class() {
 	}
 
-	public Class(ClassType classType, LocalDateTime startTime) {
+	public Class(UUID id, ClassType classType, LocalDateTime startTime) {
+		this.id = id;
 		this.startTime = startTime;
 		this.endTime = startTime.plus(classType.duration());
 		this.classType = classType;
@@ -78,7 +80,7 @@ public class Class {
 		return false;
 	}
 
-	public void confirmReservation(Long memberId) {
+	public void confirmReservation(UUID memberId) {
 		reservations.stream()
 			.filter(reservation -> memberId.equals(reservation.getMemberId()))
 			.findFirst()
@@ -87,7 +89,7 @@ public class Class {
 	
 	public void finish() {
 		finished = true;
-		List<Long> membersWhoNotAttended = reservations.stream()
+		List<UUID> membersWhoNotAttended = reservations.stream()
 				.filter(reservation -> !reservation.isConfirmed())
 				.map(reservation -> reservation.getMemberId())
 				.collect(toList());

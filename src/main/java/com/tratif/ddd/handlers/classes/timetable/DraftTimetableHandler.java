@@ -23,6 +23,6 @@ public class DraftTimetableHandler {
 	
 	public void handle(DraftTimetable command) {
 		ClassType classType = command.classType();
-		repository.save(new Timetable(classType));
+		repository.save(new Timetable(command.id(), classType));
 	}
 }

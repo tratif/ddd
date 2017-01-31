@@ -1,13 +1,14 @@
 package com.tratif.ddd.handlers.classes.enrollment.command;
 
 import java.time.Duration;
+import java.util.UUID;
 
 public class ImposeBan {
 
-	private Long memberId;
+	private UUID memberId;
 	private Duration banDuration;
 	
-	public ImposeBan(Long memberId, Duration duration) {
+	public ImposeBan(UUID memberId, Duration duration) {
 		this.memberId = memberId;
 		this.banDuration = duration;
 	}
@@ -16,7 +17,7 @@ public class ImposeBan {
 		return banDuration;
 	}
 	
-	public Long getMemberId() {
+	public UUID getMemberId() {
 		return memberId;
 	}
 }

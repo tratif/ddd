@@ -1,5 +1,6 @@
 package com.tratif.ddd.domain.classes.timetable;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
@@ -7,7 +8,7 @@ import javax.persistence.Embeddable;
 
 
 @Embeddable
-public class ScheduledDate {
+public class ScheduledDate implements Serializable {
 
 	private DayOfWeek dayOfWeek;
 	private LocalTime startTime;

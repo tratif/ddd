@@ -1,15 +1,17 @@
 package com.tratif.ddd.domain.classes.enrollment.events;
 
 import java.time.Duration;
+import java.util.UUID;
 
 import com.tratif.ddd.DomainEvent;
 
+@SuppressWarnings("serial")
 public class MemberBanned extends DomainEvent {
 
-	private Long memberId;
+	private UUID memberId;
 	private Duration bannedTo;
 	
-	public MemberBanned(Long memberId, Duration bannedTo) {
+	public MemberBanned(UUID memberId, Duration bannedTo) {
 		this.memberId = memberId;
 		this.bannedTo = bannedTo;
 	}
@@ -18,7 +20,9 @@ public class MemberBanned extends DomainEvent {
 		return bannedTo;
 	}
 	
-	public Long memberId() {
+	@Override
+	public UUID getId() {
 		return memberId;
 	}
+
 }

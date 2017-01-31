@@ -1,6 +1,7 @@
 package com.tratif.ddd.web.classes.timetable;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,11 +31,11 @@ public class PublishTimetableController {
 	}
 	
 	public static class TimetablePublicationDto {
-		private Long timetableId;
+		private UUID timetableId;
 		private LocalDate validFrom;
 		private LocalDate validTo;
 		
-		public Long getTimetableId() {
+		public UUID getTimetableId() {
 			return timetableId;
 		}
 		public LocalDate getValidFrom() {

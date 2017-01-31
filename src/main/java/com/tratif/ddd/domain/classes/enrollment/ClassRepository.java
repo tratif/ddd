@@ -1,12 +1,13 @@
 package com.tratif.ddd.domain.classes.enrollment;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public interface ClassRepository {
 
-	Class findById(Long id);
+	Class findById(UUID id);
 
 	void save(Class clazz);
 
-	Class findNearestForMember(Long memberId, LocalDateTime notFarerThan);
+	Class findNearestForMember(UUID memberId, LocalDateTime notFarerThan);
 }

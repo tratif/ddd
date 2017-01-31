@@ -1,20 +1,22 @@
 package com.tratif.ddd.domain.classes.enrollment;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.tratif.ddd.domain.AggregateRoot;
+
 @Entity
 @Table(name = "reservations")
-public class Reservation {
+public class Reservation extends AggregateRoot {
 
-	@Id @GeneratedValue
-	private Long id;
+	@Id
+	private UUID id;
 	
-	private Long memberId;
+	private UUID memberId;
 	
 	private boolean confirmed;
 	
@@ -22,11 +24,11 @@ public class Reservation {
 	Reservation() {
 	}
 	
-	public Reservation(Long memberId) {
+	public Reservation(UUID memberId) {
 		this.memberId = memberId;
 	}
 	
-	Long getMemberId() {
+	UUID getMemberId() {
 		return memberId;
 	}
 
@@ -37,10 +39,19 @@ public class Reservation {
 	}
 
 	boolean isMadeBy(Member member) {
-		return Objects.equals(member.getId(), memberId);
+		return isMadeBy(member.getId());
+	}
+	
+	boolean isMadeBy(UUID memberId) {
+		return Objects.equals(memberId, memberId);
 	}
 
 	public boolean isConfirmed() {
 		return confirmed;
+	}
+
+	@Override
+	public UUID getId() {
+		return id;
 	}
 }

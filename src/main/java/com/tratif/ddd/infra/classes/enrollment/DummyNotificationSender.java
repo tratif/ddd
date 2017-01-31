@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.tratif.ddd.domain.classes.enrollment.BanNotificationSender;
 
+
 @Component
 public class DummyNotificationSender implements BanNotificationSender {
 

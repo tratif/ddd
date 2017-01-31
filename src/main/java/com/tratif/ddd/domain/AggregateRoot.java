@@ -1,15 +1,19 @@
 package com.tratif.ddd.domain;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 public abstract class AggregateRoot {
 
 	private List<Event> uncommitedChanges = new LinkedList<>();
 	
-	private Map<Class<?>, Consumer<Event>> eventHandlers;
+	private Map<Class<? extends Event>, Consumer<Event>> eventHandlers = new HashMap<>();
+	
+	public abstract UUID getId();
 	
 	public List<Event> getUncommitedChanges() {
 		return uncommitedChanges;
@@ -34,7 +38,7 @@ public abstract class AggregateRoot {
 		}
 	}
 	
-	protected void registerEventHandler(Class<?> clazz, Consumer<Event> eventHandler) {
+	protected void registerEventHandler(Class<? extends Event> clazz, Consumer<Event> eventHandler) {
 		eventHandlers.put(clazz, eventHandler);
 	}
 	

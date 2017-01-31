@@ -1,5 +1,7 @@
 package com.tratif.ddd.domain.classes.enrollment;
 
+import java.util.UUID;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class ReservationService {
 		this.reservationRepo = reservationRepo;
 	}
 	
-	public void makeReservation(Long memberId, Long classId) {
+	public void makeReservation(UUID memberId, UUID classId) {
 		Member member = memberRepo.findById(memberId);
 		Class clazz = classRepo.findById(classId);
 		

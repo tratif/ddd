@@ -1,6 +1,7 @@
 package com.tratif.ddd.web.classes.enrollment;
 
 import java.time.Duration;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -28,7 +29,7 @@ public class ImposeBanController {
 
 	@PostMapping("/{memberId}/ban")
 	@ResponseBody
-	public void imposeBan(@PathVariable("memberId") Long memberId, @Valid @RequestBody ImposeBanDto imposeBanDto) {
+	public void imposeBan(@PathVariable("memberId") UUID memberId, @Valid @RequestBody ImposeBanDto imposeBanDto) {
 		handler.handle(new ImposeBan(memberId, Duration.ofDays(imposeBanDto.getBanDurationInDays())));
 	}
 }

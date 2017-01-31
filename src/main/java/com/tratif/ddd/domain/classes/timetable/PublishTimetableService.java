@@ -1,9 +1,11 @@
 package com.tratif.ddd.domain.classes.timetable;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.tratif.ddd.domain.classes.enrollment.Class;
 import com.tratif.ddd.domain.classes.enrollment.ClassRepository;
 
@@ -21,7 +23,7 @@ public class PublishTimetableService {
 	}
 	
 	
-	public void publishTimetable(Long timetableId, Period validityPeriod) {
+	public void publishTimetable(UUID timetableId, Period validityPeriod) {
 		Timetable timetable = timetableRepository.findById(timetableId);
 		
 		List<Class> newClasses = timetable.publish(validityPeriod);

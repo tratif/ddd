@@ -3,13 +3,14 @@ package com.tratif.ddd.domain.classes.enrollment;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.tratif.ddd.DomainEventPublisher;
+import com.tratif.ddd.domain.AggregateRoot;
 import com.tratif.ddd.domain.classes.enrollment.events.MemberBanned;
 import com.tratif.ddd.domain.classes.enrollment.exception.ClassTypeAlreadyScheduledException;
 import com.tratif.ddd.domain.classes.enrollment.exception.MemberIsBannedException;
@@ -19,12 +20,12 @@ import com.tratif.ddd.handlers.classes.enrollment.OverlappingClassException;
 
 @Entity
 @Table(name = "members")
-public class Member {
+public class Member extends AggregateRoot {
 
 	private static final Duration DEFAULT_BAN_DURATION = Duration.ofDays(4);
 
-	@Id @GeneratedValue
-	private Long id;
+	@Id
+	private UUID id;
 
 	private String name;
 	
@@ -35,7 +36,8 @@ public class Member {
 	Member() {
 	}
 	
-	public Member(String name) {
+	public Member(UUID id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 	
@@ -56,7 +58,7 @@ public class Member {
 		}
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 	

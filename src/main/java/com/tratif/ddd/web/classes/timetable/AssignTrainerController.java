@@ -2,6 +2,7 @@ package com.tratif.ddd.web.classes.timetable;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,6 @@ public class AssignTrainerController {
 	@Autowired
 	private AssignTrainerHandler handler;
 	
-	
 	@RequestMapping(value = "/timetables/{timetableId}/trainer-assignments", method = RequestMethod.POST)
 	public void assignTrainer(@RequestBody TrainerAssignmentDto assignment) {
 		AssignTrainer command = new AssignTrainer(
@@ -33,8 +33,8 @@ public class AssignTrainerController {
 	}
 	
 	public static class TrainerAssignmentDto {
-		private Long trainerId;
-		private Long timetableId;
+		private UUID trainerId;
+		private UUID timetableId;
 		private ClassType classType;
 		private DayOfWeek dayOfWeek;
 		private int hour;
@@ -52,10 +52,10 @@ public class AssignTrainerController {
 		public int getMinute() {
 			return minute;
 		}
-		public Long getTimetableId() {
+		public UUID getTimetableId() {
 			return timetableId;
 		}
-		public Long getTrainerId() {
+		public UUID getTrainerId() {
 			return trainerId;
 		}
 	}

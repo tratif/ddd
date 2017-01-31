@@ -1,14 +1,16 @@
 package com.tratif.ddd.handlers.classes.enrollment.command;
 
+import java.util.UUID;
+
 public class ClockIn {
 
-	private Long memberId;
+	private UUID memberId;
 	
-	public ClockIn(Long memberId) {
+	public ClockIn(UUID memberId) {
 		this.memberId = memberId;
 	}
 	
-	public Long getMemberId() {
+	public UUID getMemberId() {
 		return memberId;
 	}
 }

@@ -1,11 +1,12 @@
 package com.tratif.ddd.domain;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface EventsStorage<T extends AggregateRoot> {
-
-	List<Event> getEventsForAggregate(Class<T> clazz, Long id);
+public interface EventsStorage {
 
 	void save(List<Event> uncommitedChanges);
+
+	List<Event> loadEvents(UUID id);
 
 }

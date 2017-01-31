@@ -2,15 +2,16 @@ package com.tratif.ddd.handlers.classes.timetable.command;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class AssignTrainer {
 
-	private Long timetableId;
+	private UUID timetableId;
 	private DayOfWeek dayOfWeek;
 	private LocalTime classTime;
-	private Long trainerId;
+	private UUID trainerId;
 	
-	public AssignTrainer(Long timetableId, DayOfWeek dayOfWeek, LocalTime classTime, Long trainerId) {
+	public AssignTrainer(UUID timetableId, DayOfWeek dayOfWeek, LocalTime classTime, UUID trainerId) {
 		this.timetableId = timetableId;
 		this.dayOfWeek = dayOfWeek;
 		this.classTime = classTime;
@@ -25,11 +26,11 @@ public class AssignTrainer {
 		return dayOfWeek;
 	}
 	
-	public Long timetableId() {
+	public UUID timetableId() {
 		return timetableId;
 	}
 	
-	public Long trainerId() {
+	public UUID trainerId() {
 		return trainerId;
 	}
 }

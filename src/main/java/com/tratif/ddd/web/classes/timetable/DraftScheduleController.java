@@ -1,5 +1,7 @@
 package com.tratif.ddd.web.classes.timetable;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +22,7 @@ public class DraftScheduleController {
 	
 	@RequestMapping(path = "/timetables", method = RequestMethod.POST)
 	public void draftSchedule(@RequestBody ScheduleDto scheduleDto) {
-		DraftTimetable command = new DraftTimetable(scheduleDto.getClassType());
+		DraftTimetable command = new DraftTimetable(UUID.randomUUID(), scheduleDto.getClassType());
 		handler.handle(command);
 	}
 	
